@@ -5,49 +5,49 @@ print('1.Binary')
 print('2.Octal')
 print('3.Decimal')
 print('4.Hexadecimal')
-    
-while True:
-    try:
-        s = int(input('Please select input type: '))
-    except ValueError:
-        print("Sorry, I didn't understand that.")
-        continue
-    if s <= 0 or s >= 5:
-        print("Invalid input")
-        continue
-    else:
-        break
-while True:
-    try:    
-        if s == 1 and s <= 4:
-            i = int(input('Enter your input in Binary: '), 2)
-        if s == 2 and s <= 4:
-            i = int(input('Enter your input in Octal: '), 8)    
-        if s == 3 and s <= 4:
-            i = int(input('Enter your input in Decimal: '), 10)
-        if s == 4 and s <= 4:
-            i = int(input('Enter your input in Hexadecimal: '), 16)
-    except ValueError:
-        print("Sorry, I didn't understand that.")
-        continue
-    else:
-        break
-while True:
-    try:    
-        o = int(input('Please select output type: '))
-        if o == 1:
-            print('Your Binary number is:', bin(i))
-        if o == 2:
-            print('Your Octal number is:', oct(i))    
-        if o == 3:
-            print('Your Decimal number is:',int(i))
-        if o == 4:
-            print('Your Hexadecimal number is:',hex(i))
-    except ValueError:
-        print("Sorry, I didn't understand that.")
-        continue
-    if o <= 0 or o >= 5:
-        print("Invalid Input")
-        continue
-    else:
-        break
+while True:    
+    while True:
+        try:
+            s = int(input('Please select input type: '))
+        except ValueError:
+            print("Sorry, I didn't understand that.")
+            continue
+        if s <= 0 or s >= 5:
+            print("Invalid input")
+            continue
+        else:
+            break
+    while True:
+        try:    
+            if s == 1 and s <= 4:
+                i = int(input('Enter your input in Binary: '), 2)
+            if s == 2 and s <= 4:
+                i = int(input('Enter your input in Octal: '), 8)    
+            if s == 3 and s <= 4:
+                i = int(input('Enter your input in Decimal: '), 10)
+            if s == 4 and s <= 4:
+                i = int(input('Enter your input in Hexadecimal: '), 16)
+        except ValueError:
+            print("Sorry, I didn't understand that.")
+            continue
+        else:
+            break
+    while True:
+        try:    
+            o = int(input('Please select output type: '))
+            if o == 1:
+                print('Your Binary number is:', bin(i))
+            if o == 2:
+                print('Your Octal number is:', oct(i))    
+            if o == 3:
+                print('Your Decimal number is:',int(i))
+            if o == 4:
+                print('Your Hexadecimal number is:',hex(i))
+        except ValueError:
+            print("Sorry, I didn't understand that.")
+            continue
+        if o <= 0 or o >= 5:
+            print("Invalid Input")
+            continue
+        else:
+            break

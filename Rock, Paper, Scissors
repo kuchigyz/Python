@@ -1,0 +1,29 @@
+import random
+while True:
+    c = input('Rock, Paper or Scissors? ').lower().capitalize()
+    if c == 'R' or c == 'Rock':
+        c = 'Rock'
+    if c == 'S' or c == 'Scissors':
+        c = 'Scissors'
+    if c == 'P' or c == 'Paper':
+        c = 'Paper'
+
+    print('You chose', c)
+    rps = ['Rock', 'Paper', 'Scissors']
+    p = random.choice(rps)
+    print('The computer chose', p)
+
+    if c == p:
+        print("It's a draw")
+    if c == 'Rock' and p == 'Paper':
+        print("The computer wins")
+    if c == 'Rock' and p == 'Scissors':
+        print("You win")
+    if c == 'Paper' and p == 'Scissors':
+        print("The computer wins")
+    if c == 'Paper' and p == 'Rock':
+        print("You win")
+    if c == 'Scissors' and p == 'Paper':
+        print("You win")
+    if c == 'Scissors' and p == 'Rock':
+        print("The computer wins")   

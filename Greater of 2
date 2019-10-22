@@ -1,0 +1,13 @@
+'Greater of 2 numbers'
+
+while True:
+    a = int(input('Please enter a value for A: '))
+    b = int(input('Please enter a value for B: '))
+
+    if a == b:
+        print('A = B')
+    else:
+        if a > b:
+            print('A > B')
+        else:
+            print('A < B')

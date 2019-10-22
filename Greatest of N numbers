@@ -1,0 +1,11 @@
+'Greatest of N numbers'
+
+lst = [ ] 
+n = int(input("Enter number of elements to compare: ")) 
+  
+for i in range(0, n): 
+    ele = int(input('Enter number to compare:'))
+    lst.append(ele) 
+
+lst.sort()      
+print('Greatest number is: ',lst[n-1]) 

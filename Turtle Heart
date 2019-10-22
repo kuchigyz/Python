@@ -1,0 +1,19 @@
+'Turtle Heart'
+import turtle
+
+count = 0
+turtle.left(90)
+while count < 90:
+  turtle.forward(1)
+  turtle.right(2)
+  count = count + 1
+turtle.right(40)
+turtle.forward(90)
+turtle.right(100)
+turtle.forward(90)
+turtle.right(40)
+count = 0
+while count < 90:
+  turtle.forward(1)
+  turtle.right(2)
+  count = count + 1

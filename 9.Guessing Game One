@@ -1,0 +1,20 @@
+import random
+
+print('Guess a number from 0 to 9. Type exit to quit the game.')
+x = random.randint(0, 9)
+tries = 0
+
+while True:
+    guess = input('Guess a number: ')
+    tries += 1
+    if guess == 'exit':
+        break
+    guess = int(guess)
+    if guess > x:
+        print('The number is <', guess)
+    if guess < x:
+        print('The number is >', guess)
+    if guess == x:
+        print('You Win, the right number was', x)
+        print('You won after {} tries'.format(tries))
+        break

@@ -1,0 +1,8 @@
+'character input'
+import datetime
+date = datetime.datetime.now()
+name = str(input('Please enter your name: '))
+age = int(input('Please enter your age: '))
+year = str(date.year + 100 - age)
+
+print('Hi ' + name + ' you are going to turn 100 in the year ' + year)

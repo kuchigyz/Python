@@ -1,0 +1,34 @@
+'Cows and Bulls'
+
+import numpy.random
+
+gen_number = numpy.random.randint(1000, 9999)
+num_str = str(gen_number)
+c_b = [0, 0]
+tries = 0
+
+while c_b[1] < 4:
+    guess = str(input('Guess 4 digits: '))
+    guess = guess.lower()
+    if guess == 'exit' or guess == 'quit':
+        break
+    if guess == 'cheat':
+        print('CHEATER!!! ',num_str)
+        continue
+    tries += 1
+    if int(guess) < 1000 or int(guess) > 9999:
+        print('Invalid Number, try again.')
+    else:
+        c_b = [0, 0]
+        for j in range(4):
+            if guess[j] in num_str:
+                c_b[0] +=1 
+        for i in range(4):
+            if num_str[i] == guess[i]:
+                c_b[1] +=1
+                c_b[0] -=1 
+    print('You have {0} Cows and {1} Bulls: '.format(c_b[0], c_b[1]))
+if c_b[1] == 4:    
+    print('Congratz, you WIN! It took you {} tries.'.format(tries))
+else:
+    print('You surrendered after {} tries :('.format(tries))

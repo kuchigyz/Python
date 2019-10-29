@@ -1,19 +1,12 @@
 'Turtle Heart'
 import turtle
 
-
-turtle.left(72)
-turtle.forward(110)
-turtle.left(144)
-turtle.forward(110)
-turtle.left(144)
-turtle.forward(110)
-turtle.left(144)
-turtle.forward(110)
-turtle.left(144)
-turtle.forward(110)
-turtle.left(72)
 count = 0
 while count < 360:
   turtle.forward(1)
   turtle.left(1)
+  count += 1
+turtle.right(72)
+while True:
+  turtle.left(144) 
+  turtle.forward(110)

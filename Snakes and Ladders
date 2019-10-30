@@ -59,23 +59,23 @@ while player < 36:
 
         print('｜',board[0], '｜',colored(board[1], 'green'), '｜',colored(board[2], 'red'), '｜',board[3], '｜',colored(board[4], 'red'), '｜',board[5],'｜')
         
-        print('｜----'+colored('--', 'green')+'----------------------------｜')
+        print('｜----'+colored('--', 'green')+'-----'+colored('--', 'red')+'--------------'+colored('----', 'red')+'---｜')
         
         print('｜',colored(board[6], 'green'), '｜',board[7], colored('｜', 'red'),colored(board[8], 'green'), '｜',board[9], '｜',colored(board[10], 'green'), '｜',colored(board[11], 'red'),'｜')
         
-        print('｜-------------'+colored('--', 'green')+'------------'+colored('--', 'green')+'-----｜')
+        print('｜---------'+colored('--', 'red')+'--'+colored('--', 'green')+'------------'+colored('--', 'green')+'-----｜')
         
         print('｜',colored(board[12], 'red'), '｜',board[13], '｜',board[14], '｜',board[15], '｜',colored(board[16], 'red'), colored('｜', 'green'),board[17],'｜')
         
-        print('｜----'+colored('-------------', 'red')+'-'+colored('--', 'green')+'---------'+colored('--', 'green')+'---｜')
+        print('｜----'+colored('-------------', 'red')+'-'+colored('--', 'green')+'-------'+colored('--', 'red')+''+colored('--', 'green')+'---｜')
         
         print('｜',board[18], colored('｜', 'red'),board[19], '｜',colored(board[20], 'green'), '｜',colored(board[21], 'red'), '｜',colored(board[22], 'red'), colored('｜', 'red'),colored(board[23], 'green'),'｜')
         
-        print('｜-----------'+colored('--', 'green')+'-----'+colored('--', 'green')+'--------------｜')
+        print('｜---'+colored('--', 'red')+'------'+colored('--', 'green')+'-----'+colored('--', 'green')+'---'+colored('--', 'red')+'----'+colored('--', 'red')+'---｜')
         
-        print('｜',colored(board[24], 'red'),'｜', board[25], colored('｜', 'green'),board[26], '｜ ',colored(board[27], 'green'), '｜ ',board[28], '｜ ',colored(board[29], 'green'),'｜')
+        print('｜',colored(board[24], 'red'),'｜', board[25], colored('｜', 'green'),board[26], '｜ ',colored(board[27], 'green'), colored('｜ ', 'red'),board[28], '｜ ',colored(board[29], 'green'),'｜')
         
-        print('｜---------'+colored('--', 'green')+'-----------------'+colored('--', 'green')+'----｜')
+        print('｜---------'+colored('--', 'green')+'----------'+colored('--', 'red')+'-----'+colored('--', 'green')+''+colored('--', 'red')+'--｜')
         
         print('｜ ',board[30], '｜ ',colored(board[31], 'green'), '｜ ',board[32], '｜ ',colored(board[33], 'red'), '｜ ',colored(board[34], 'green'), '｜ ',colored(board[35], 'red'),'｜')
         

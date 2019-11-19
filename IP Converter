@@ -1,0 +1,79 @@
+while True:
+  ipString = input('Enter IP: ')
+  if ipString == '':
+    break
+  ipString = ipString.split('.')
+  maskString = input('Enter Mask: ')
+  if maskString == '':
+    break
+  maskString = maskString.split('.')
+  ip = [int(i) for i in ipString]
+  mask = [int(i) for i in maskString]
+  if ip[0] < 128:
+    ipClass = 1
+  elif ip[0] < 192:
+    ipClass = 2  
+  else:
+    ipClass = 3
+
+  #Number of Subnet Bits
+  n = mask[ipClass]
+  subnetBits = 0
+  while (n): 
+      n &= (n-1)  
+      subnetBits+= 1
+  print('Subnet Bits:', subnetBits)
+
+  #Number of possible Subnets
+  print('Subnets:    ', 2 ** subnetBits)
+
+  #Number of Host Bits
+  if ipClass == 1:
+    hostBits = 3 * 8 - subnetBits
+  if ipClass == 2:
+    hostBits = 2 * 8 - subnetBits
+  if ipClass == 3:
+    hostBits = 8 - subnetBits
+  print('Host Bits:  ', hostBits)
+  
+  #Number of possible Hosts
+  print('Hosts:      ', 2 ** hostBits - 2)
+
+  #Network Adress
+  networkAdress = ip.copy()
+  networkAdress[ipClass] = ip[ipClass] & mask[ipClass]
+  if ipClass == 1: 
+    networkAdress[ipClass + 1] = 0
+    networkAdress[ipClass + 2] = 0
+  if ipClass == 2:
+    networkAdress[ipClass + 1] = 0
+
+  #First Host Adress
+  firstHostAdress = networkAdress.copy()
+  firstHostAdress[3] += 1
+
+  #Broadcast Adress
+  broadcastAdress = networkAdress.copy()
+  broadcastAdress[ipClass] = [int(d) for d in bin((1<<8)+broadcastAdress[ipClass])[-8:]]
+  for i in range(subnetBits, 8):
+    broadcastAdress[ipClass][i] = 1  
+  broadcastAdress[ipClass] = int(''.join(map(str, broadcastAdress[ipClass])), 2)
+  if ipClass == 1:
+    broadcastAdress[2] = 255
+    broadcastAdress[3] = 255
+  if ipClass == 2:
+    broadcastAdress[3] = 255  
+
+  #Last Host Adress
+  lastHostAdress = broadcastAdress.copy()
+  lastHostAdress[3] -= 1
+
+  #Print Adress
+  networkAdress = '.'.join([str(elem) for elem in networkAdress]) 
+  print('Network:    ', networkAdress)
+  firstHostAdress = '.'.join([str(elem) for elem in firstHostAdress]) 
+  print('First host: ', firstHostAdress)
+  lastHostAdress = '.'.join([str(elem) for elem in lastHostAdress]) 
+  print('Last host:  ', lastHostAdress)
+  broadcastAdress = '.'.join([str(elem) for elem in broadcastAdress]) 
+  print('Broadcast:  ', broadcastAdress)

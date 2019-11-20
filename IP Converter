@@ -81,15 +81,10 @@ while True:
   #Last Host Adress
   lastHostAdress = broadcastAdress.copy()
   lastHostAdress[3] -= 1
-
-  c = binToList(networkAdress[ipClass])
+  
   #Print Adress
-  networkAdress = listToStr(networkAdress)
-  print('Network:    ', networkAdress)
-  firstHostAdress = listToStr(firstHostAdress)
-  print('First host: ', firstHostAdress)
-  lastHostAdress = listToStr(lastHostAdress)
-  print('Last host:  ', lastHostAdress)
-  broadcastAdress = listToStr(broadcastAdress)
-  print('Broadcast:  ', broadcastAdress)
-  print('\n Bitwise Multiplication\n{}\n{}\n{}\n'.format(a, b, c))
+  print('Network:    ', listToStr(networkAdress))
+  print('First host: ', listToStr(firstHostAdress))
+  print('Last host:  ', listToStr(lastHostAdress))
+  print('Broadcast:  ', listToStr(broadcastAdress))
+  print('\n Bitwise Multiplication\n{}\n{}\n{}\n'.format(a, b, binToList(networkAdress[ipClass])))

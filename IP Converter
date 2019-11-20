@@ -1,5 +1,7 @@
 import ipaddress
 
+stopCommands = ['exit', 'quit', 'stop', 'cancel']
+
 #Functions
 def binToList(b):
   return [int(d) for d in bin((1<<8)+b)[-8:]]
@@ -7,50 +9,41 @@ def listToStr(l):
   return '.'.join([str(i) for i in l])
 
 while True:
-  stopCommands = ['exit', 'quit', 'stop', 'cancel']
-  
+  #Input IP Address
   ipString = input('IP Adress:   ')
+  if ipString in stopCommands:
+    break
   try:
     ipaddress.IPv4Address(ipString)
   except:
     continue  
-  if ipString == '':
-    continue
-  elif ipString in stopCommands:
-    break
-  ipString = ipString.split('.')
 
+  #Input Subnet Mask
   maskString = input('Subnet Mask: ')
+  if maskString in stopCommands:
+    break  
   try:
     ipaddress.IPv4Network(maskString)
   except:
     continue  
-  if maskString == '':
-    continue
-  elif maskString in stopCommands:
-    break  
-  maskString = maskString.split('.')
-
-  ip = [int(i) for i in ipString]
-  mask = [int(i) for i in maskString]
-
+  
+  ip = [int(i) for i in ipString.split('.')]
+  mask = [int(i) for i in maskString.split('.')]
   if ip[0] < 128:
     ipClass = 1
   elif ip[0] < 192:
     ipClass = 2  
   else:
     ipClass = 3
-
   a = binToList(ip[ipClass])
   b = binToList(mask[ipClass])
+
   #Number of Subnet Bits
   subnetBits = 0
   for i in range(len(b)-1,-1,-1):
     if b[i] == 1:
         subnetBits = i + 1
         break
-  print('Subnet Bits:', subnetBits)
-  print('Subnets:    ', 2 ** subnetBits)
 
   #Number of Host Bits
   if ipClass == 1:
@@ -59,44 +52,44 @@ while True:
     hostBits = 2 * 8 - subnetBits
   if ipClass == 3:
     hostBits = 8 - subnetBits
-  print('Host Bits:  ', hostBits)
-  
-  #Number of possible Hosts
-  print('Hosts:      ', 2 ** hostBits - 2)
 
-  #Network Adress
-  networkAdress = ip.copy()
-  networkAdress[ipClass] = ip[ipClass] & mask[ipClass]
-  c = binToList(networkAdress[ipClass])
+  #Network Address
+  networkAddress = ip.copy()
+  networkAddress[ipClass] = ip[ipClass] & mask[ipClass]
+  c = binToList(networkAddress[ipClass])
   if ipClass == 1: 
-    networkAdress[ipClass + 1] = 0
-    networkAdress[ipClass + 2] = 0
+    networkAddress[ipClass + 1] = 0
+    networkAddress[ipClass + 2] = 0
   if ipClass == 2:
-    networkAdress[ipClass + 1] = 0
+    networkAddress[ipClass + 1] = 0
 
-  #First Host Adress
-  firstHostAdress = networkAdress.copy()
-  firstHostAdress[3] += 1
+  #First Host Address
+  firstHostAddress = networkAddress.copy()
+  firstHostAddress[3] += 1
 
-  #Broadcast Adress
-  broadcastAdress = networkAdress.copy()
-  broadcastAdress[ipClass] = binToList(broadcastAdress[ipClass])
+  #Broadcast Address
+  broadcastAddress = networkAddress.copy()
+  broadcastAddress[ipClass] = binToList(broadcastAddress[ipClass])
   for i in range(subnetBits, 8):
-    broadcastAdress[ipClass][i] = 1  
-  broadcastAdress[ipClass] = int(''.join(map(str, broadcastAdress[ipClass])), 2)
+    broadcastAddress[ipClass][i] = 1  
+  broadcastAddress[ipClass] = int(''.join(map(str, broadcastAddress[ipClass])), 2)
   if ipClass == 1:
-    broadcastAdress[2] = 255
-    broadcastAdress[3] = 255
+    broadcastAddress[2] = 255
+    broadcastAddress[3] = 255
   if ipClass == 2:
-    broadcastAdress[3] = 255  
+    broadcastAddress[3] = 255  
 
-  #Last Host Adress
-  lastHostAdress = broadcastAdress.copy()
-  lastHostAdress[3] -= 1
+  #Last Host Address
+  lastHostAddress = broadcastAddress.copy()
+  lastHostAddress[3] -= 1
 
-  #Print Adress
-  print('Network:    ', listToStr(networkAdress))
-  print('First host: ', listToStr(firstHostAdress))
-  print('Last host:  ', listToStr(lastHostAdress))
-  print('Broadcast:  ', listToStr(broadcastAdress))
-  print('\n Bitwise Multiplication\n{}\n{}\n{}\n'.format(a, b, binToList(networkAdress[ipClass])))
+  #Print
+  print('Subnet Bits:', subnetBits)
+  print('Subnets:    ', 2 ** subnetBits)
+  print('Host Bits:  ', hostBits)
+  print('Hosts:      ', 2 ** hostBits - 2)
+  print('Network:    ', listToStr(networkAddress))
+  print('First host: ', listToStr(firstHostAddress))
+  print('Last host:  ', listToStr(lastHostAddress))
+  print('Broadcast:  ', listToStr(broadcastAddress))
+  print('\n Bitwise Multiplication\n{}\n{}\n{}\n'.format(a, b, binToList(networkAddress[ipClass])))

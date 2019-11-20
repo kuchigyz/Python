@@ -1,11 +1,15 @@
 while True:
-  ipString =  input('Enter IP: ')
+  ipString = input('IP Adress:   ')
   if ipString == '':
-    break
+    continue
+  elif ipString == 'exit' or ipString == 'quit':
+    break  
   ipString = ipString.split('.')
-  maskString =  input('Enter Mask: ')
+  maskString = input('Subnet Mask: ')
   if maskString == '':
-    break
+    continue
+  elif maskString == 'exit' or maskString == 'quit':
+    break  
   maskString = maskString.split('.')
   ip = [int(i) for i in ipString]
   mask = [int(i) for i in maskString]
@@ -17,9 +21,8 @@ while True:
     ipClass = 3
 
   #Number of Subnet Bits
-  n = mask[ipClass]
   subnetBits = 0
-  n = [int(d) for d in bin((1<<8)+n)[-8:]]
+  n = [int(i) for i in bin((1<<8)+mask[ipClass])[-8:]]
   for i in range(len(n)-1,-1,-1):
     if n[i] == 1:
         subnetBits = i
@@ -66,13 +69,16 @@ while True:
   #Last Host Adress
   lastHostAdress = broadcastAdress.copy()
   lastHostAdress[3] -= 1
-
+  a = [int(d) for d in bin((1<<8)+ip[ipClass])[-8:]]
+  b = [int(d) for d in bin((1<<8)+mask[ipClass])[-8:]]
+  c = [int(d) for d in bin((1<<8)+networkAdress[ipClass])[-8:]]
   #Print Adress
-  networkAdress = '.'.join([str(elem) for elem in networkAdress]) 
+  networkAdress = '.'.join([str(i) for i in networkAdress]) 
   print('Network:    ', networkAdress)
-  firstHostAdress = '.'.join([str(elem) for elem in firstHostAdress]) 
+  firstHostAdress = '.'.join([str(i) for i in firstHostAdress]) 
   print('First host: ', firstHostAdress)
-  lastHostAdress = '.'.join([str(elem) for elem in lastHostAdress]) 
+  lastHostAdress = '.'.join([str(i) for i in lastHostAdress]) 
   print('Last host:  ', lastHostAdress)
-  broadcastAdress = '.'.join([str(elem) for elem in broadcastAdress]) 
+  broadcastAdress = '.'.join([str(i) for i in broadcastAdress]) 
   print('Broadcast:  ', broadcastAdress)
+  print('\n Bitwise Multiplication\n{}\n{}\n{}\n'.format(a, b, c))

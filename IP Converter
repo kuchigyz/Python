@@ -1,14 +1,15 @@
 while True:
+  stopCommands = ['exit', 'quit', 'stop', 'cancel']
   ipString = input('IP Adress:   ')
   if ipString == '':
     continue
-  elif ipString == 'exit' or ipString == 'quit':
+  elif ipString in stopCommands:
     break  
   ipString = ipString.split('.')
   maskString = input('Subnet Mask: ')
   if maskString == '':
     continue
-  elif maskString == 'exit' or maskString == 'quit':
+  elif maskString in stopCommands:
     break  
   maskString = maskString.split('.')
 

@@ -1,12 +1,30 @@
+import ipaddress
+
+#Functions
+def binToList(b):
+  return [int(d) for d in bin((1<<8)+b)[-8:]]
+def listToStr(l):
+  return '.'.join([str(i) for i in l])
+
 while True:
   stopCommands = ['exit', 'quit', 'stop', 'cancel']
+  
   ipString = input('IP Adress:   ')
+  try:
+    ipaddress.IPv4Address(ipString)
+  except:
+    continue  
   if ipString == '':
     continue
   elif ipString in stopCommands:
-    break  
+    break
   ipString = ipString.split('.')
+
   maskString = input('Subnet Mask: ')
+  try:
+    ipaddress.IPv4Network(maskString)
+  except:
+    continue  
   if maskString == '':
     continue
   elif maskString in stopCommands:
@@ -22,12 +40,6 @@ while True:
     ipClass = 2  
   else:
     ipClass = 3
-
-  #Functions
-  def binToList(b):
-    return [int(d) for d in bin((1<<8)+b)[-8:]]
-  def listToStr(l):
-    return '.'.join([str(i) for i in l])
 
   a = binToList(ip[ipClass])
   b = binToList(mask[ipClass])
@@ -81,7 +93,7 @@ while True:
   #Last Host Adress
   lastHostAdress = broadcastAdress.copy()
   lastHostAdress[3] -= 1
-  
+
   #Print Adress
   print('Network:    ', listToStr(networkAdress))
   print('First host: ', listToStr(firstHostAdress))

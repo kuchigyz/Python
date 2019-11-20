@@ -1,9 +1,9 @@
 while True:
-  ipString = input('Enter IP: ')
+  ipString =  input('Enter IP: ')
   if ipString == '':
     break
   ipString = ipString.split('.')
-  maskString = input('Enter Mask: ')
+  maskString =  input('Enter Mask: ')
   if maskString == '':
     break
   maskString = maskString.split('.')
@@ -19,12 +19,11 @@ while True:
   #Number of Subnet Bits
   n = mask[ipClass]
   subnetBits = 0
-  while (n): 
-      n &= (n-1)  
-      subnetBits+= 1
-  print('Subnet Bits:', subnetBits)
-
-  #Number of possible Subnets
+  n = [int(d) for d in bin((1<<8)+n)[-8:]]
+  for i in range(len(n)-1,-1,-1):
+    if n[i] == 1:
+        subnetBits = i
+        break
   print('Subnets:    ', 2 ** subnetBits)
 
   #Number of Host Bits

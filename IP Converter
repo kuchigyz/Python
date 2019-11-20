@@ -11,8 +11,10 @@ while True:
   elif maskString == 'exit' or maskString == 'quit':
     break  
   maskString = maskString.split('.')
+
   ip = [int(i) for i in ipString]
   mask = [int(i) for i in maskString]
+
   if ip[0] < 128:
     ipClass = 1
   elif ip[0] < 192:
@@ -20,11 +22,18 @@ while True:
   else:
     ipClass = 3
 
+  #Functions
+  def binToList(b):
+    return [int(d) for d in bin((1<<8)+b)[-8:]]
+  def listToStr(l):
+    return '.'.join([str(i) for i in l])
+
+  a = binToList(ip[ipClass])
+  b = binToList(mask[ipClass])
   #Number of Subnet Bits
   subnetBits = 0
-  n = [int(i) for i in bin((1<<8)+mask[ipClass])[-8:]]
-  for i in range(len(n)-1,-1,-1):
-    if n[i] == 1:
+  for i in range(len(b)-1,-1,-1):
+    if b[i] == 1:
         subnetBits = i + 1
         break
   print('Subnet Bits:', subnetBits)
@@ -45,6 +54,7 @@ while True:
   #Network Adress
   networkAdress = ip.copy()
   networkAdress[ipClass] = ip[ipClass] & mask[ipClass]
+  c = binToList(networkAdress[ipClass])
   if ipClass == 1: 
     networkAdress[ipClass + 1] = 0
     networkAdress[ipClass + 2] = 0
@@ -57,7 +67,7 @@ while True:
 
   #Broadcast Adress
   broadcastAdress = networkAdress.copy()
-  broadcastAdress[ipClass] = [int(d) for d in bin((1<<8)+broadcastAdress[ipClass])[-8:]]
+  broadcastAdress[ipClass] = binToList(broadcastAdress[ipClass])
   for i in range(subnetBits, 8):
     broadcastAdress[ipClass][i] = 1  
   broadcastAdress[ipClass] = int(''.join(map(str, broadcastAdress[ipClass])), 2)
@@ -70,16 +80,15 @@ while True:
   #Last Host Adress
   lastHostAdress = broadcastAdress.copy()
   lastHostAdress[3] -= 1
-  a = [int(d) for d in bin((1<<8)+ip[ipClass])[-8:]]
-  b = [int(d) for d in bin((1<<8)+mask[ipClass])[-8:]]
-  c = [int(d) for d in bin((1<<8)+networkAdress[ipClass])[-8:]]
+
+  c = binToList(networkAdress[ipClass])
   #Print Adress
-  networkAdress = '.'.join([str(i) for i in networkAdress]) 
+  networkAdress = listToStr(networkAdress)
   print('Network:    ', networkAdress)
-  firstHostAdress = '.'.join([str(i) for i in firstHostAdress]) 
+  firstHostAdress = listToStr(firstHostAdress)
   print('First host: ', firstHostAdress)
-  lastHostAdress = '.'.join([str(i) for i in lastHostAdress]) 
+  lastHostAdress = listToStr(lastHostAdress)
   print('Last host:  ', lastHostAdress)
-  broadcastAdress = '.'.join([str(i) for i in broadcastAdress]) 
+  broadcastAdress = listToStr(broadcastAdress)
   print('Broadcast:  ', broadcastAdress)
   print('\n Bitwise Multiplication\n{}\n{}\n{}\n'.format(a, b, c))

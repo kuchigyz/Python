@@ -1,0 +1,6 @@
+def BinToDec(n): #string
+  decimal = 0
+  for i, item in enumerate(n[::-1]):
+    if int(item) == 1:
+      decimal += 2**i
+  return decimal

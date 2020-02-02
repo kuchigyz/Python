@@ -1,0 +1,49 @@
+class Movie:
+    def __init__(self,title='',director='',year=''):
+        self.title = title
+        self.director = director
+        self.year = year
+    def __str__(self):
+        return "{title} {director} {year}".format(title=self.title,director=self.director, year=self.year)
+
+def AddMovie():
+  movie = Movie()
+  movie.title = input('Enter a title: ')
+  movie.director = input('Enter a director: ')
+  movie.year = input('Enter the year: ')
+  db = open("movies.txt","a") 
+  db.write('\n' + str(movie))
+  db.close()
+
+def View():
+  print('')
+  db = open("movies.txt","r")
+  print('Here is your collection of movies')
+  print(db.read())
+  db.close()
+  print('')
+
+def Search():
+    search = input('Enter title, director or year: ')
+    print('')
+    with open('movies.txt', 'r') as searchlines:
+      for line in searchlines:
+        if search in line:
+          print(line.rstrip())
+    print('')   
+
+print('Would you like to:\n1:Enter a movie\n2:View your collection\n3:Look for a movie')
+
+while True:
+  try:
+    choice = int(input('Your Choice: '))
+  except:
+    break  
+  if choice == 1:
+   AddMovie()
+  elif choice == 2:
+    View()
+  elif choice == 3:
+    Search()
+  else:
+    break

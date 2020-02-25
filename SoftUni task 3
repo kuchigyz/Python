@@ -1,0 +1,29 @@
+Mediterranean = { "standart cabin" : 27.50, 
+                  "cabin with balcony" : 30.20, 
+                  "apartment" : 40.50 }
+
+Adriatic ={ "standart cabin" : 22.99, 
+            "cabin with balcony" : 25.00, 
+            "apartment" : 34.99 }              
+
+Aegean = { "standart cabin" : 23.00, 
+            "cabin with balcony" : 26.60, 
+            "apartment" : 39.80 }
+
+destination = input("Please choose a destination: ")
+cabinType = input("Please choose a cabin type: ")
+days = int(input("How many days would you like to book: "))
+discount = 4
+if days >= 7:
+  discount = 3
+
+if destination == "Mediterranean":
+  totalPrice = Mediterranean[cabinType] * days * discount
+elif destination == "Adriatic":
+  totalPrice = Adriatic[cabinType] * days * discount
+elif destination == "Aegean":
+  totalPrice = Aegean[cabinType] * days * discount
+else:
+  print("Please enter a valid destination.")
+
+print("Annie's holiday in the {} sea costs {} lv.".format(destination, round(totalPrice, 2)))

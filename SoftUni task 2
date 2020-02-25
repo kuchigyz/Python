@@ -1,0 +1,12 @@
+budget = int(input("Enter Any's budget: "))
+towel = float(input("Enter the price of a towel: "))
+discount = int(input("Enter Any's discount: "))
+umbrella = 2 * towel / 3
+flipFlops = 3 * umbrella / 4
+bag = (flipFlops + towel) / 3
+total = round((towel + umbrella + flipFlops + bag) - (discount * (towel + umbrella + flipFlops + bag) / 100), 2)
+
+if budget >= total:
+    print("Any has {}lv. and the total cost is {}lv. She has {}lv left.".format(budget, total, budget - total))
+else:
+    print("Any has {}lv. and the total cost is {}lv. She needs {}lv more.".format(budget, total, round(total - budget, 2)))

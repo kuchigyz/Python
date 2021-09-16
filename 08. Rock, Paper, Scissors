@@ -1,29 +1,46 @@
 import random
+total = 0
+win = 0
+loss = 0
+draw = 0
+rps = ["Rock", "Paper", "Scissors"]
+
+print("Welcome to Rock, Paper, Scissors! \nEnter R for Rock, \nP for Paper, \nS for Scissors or \nQ to quit the game. \nHave fun and good luck!")
+
 while True:
-    c = input('Rock, Paper or Scissors? ').lower().capitalize()
-    if c == 'R' or c == 'Rock':
-        c = 'Rock'
-    if c == 'S' or c == 'Scissors':
-        c = 'Scissors'
-    if c == 'P' or c == 'Paper':
-        c = 'Paper'
+  total += 1
 
-    print('You chose', c)
-    rps = ['Rock', 'Paper', 'Scissors']
-    p = random.choice(rps)
-    print('The computer chose', p)
+  while True:
+    playerChoice = input("Rock, Paper or Scissors?: ").lower().capitalize()
+    if playerChoice[0] == 'R':
+      playerChoice = 'Rock'
+      break;
+    elif playerChoice[0] == 'S':
+      playerChoice = 'Scissors'
+      break;
+    elif playerChoice[0] == 'P':
+      playerChoice = 'Paper'
+      break;
+    elif playerChoice[0] == 'Q':
+      playerChoice = 'Quit'
+      break;
+    else:
+      print("Invalid Choice. Try Again.") 
 
-    if c == p:
-        print("It's a draw")
-    if c == 'Rock' and p == 'Paper':
-        print("The computer wins")
-    if c == 'Rock' and p == 'Scissors':
-        print("You win")
-    if c == 'Paper' and p == 'Scissors':
-        print("The computer wins")
-    if c == 'Paper' and p == 'Rock':
-        print("You win")
-    if c == 'Scissors' and p == 'Paper':
-        print("You win")
-    if c == 'Scissors' and p == 'Rock':
-        print("The computer wins")   
+  computerChoice = random.choice(rps)
+  
+  if playerChoice == "Quit":
+    print("Thank you for playing Rock, Paper, Scissors")
+    total -= 1
+    break;
+  elif playerChoice == computerChoice:
+    print(playerChoice, "vs.", computerChoice, "| It's a Draw")
+    draw += 1
+  elif (playerChoice == 'Rock' and computerChoice == 'Scissors') or (playerChoice == 'Scissors' and computerChoice == 'Paper') or (playerChoice == 'Paper' and computerChoice == 'Rock'):
+    print(playerChoice, "vs.", computerChoice, "| You Win!")
+    win += 1 
+  else:
+    print(playerChoice, "vs.", computerChoice, "| You Lose")
+    loss += 1
+
+print("You played a total of ",total,"games.\nWins:",win,"| Draws:",draw,"| Losses",loss)
